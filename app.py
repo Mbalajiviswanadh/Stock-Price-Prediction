@@ -4,8 +4,7 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-from keras.layers import Dense, Dropout, LSTM
-from keras.models import Sequential, load_model
+from keras.models import  load_model
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import os
