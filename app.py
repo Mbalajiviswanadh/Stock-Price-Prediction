@@ -1,6 +1,5 @@
 # Import necessary libraries
 import streamlit as st
-import yfinance as yf
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
@@ -26,6 +25,7 @@ scaler = MinMaxScaler(feature_range=(0, 1))
 # Check if a stock is selected
 if stock:
     # Downloading data
+    import yfinance as yf
     df = yf.download(stock, start, end)
 
     # Describing Data
