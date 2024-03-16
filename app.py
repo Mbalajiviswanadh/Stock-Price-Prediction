@@ -1,5 +1,4 @@
 # Import necessary libraries
-from sklearn.metrics import r2_score, mean_squared_error
 import streamlit as st
 import yfinance as yf
 import pandas as pd
