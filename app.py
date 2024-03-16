@@ -114,7 +114,11 @@ if stock:
                         yaxis_title='Price',
                         template='plotly_white')
         st.plotly_chart(fig2)
-        
+        def loading():
+            st.text("Loading...")
+
+    # Display loading message
+        loading()
         #------------------------------------------------------- Liner Regression -----------------------------------------
         # Import necessary libraries
         from sklearn.model_selection import train_test_split
@@ -175,8 +179,9 @@ if stock:
                         template='plotly_white')
         st.plotly_chart(fig3)
         
+        
         #-------------------------------------------------------Random Forest Regressor -----------------------------------------
-
+        loading()
         
         from sklearn.ensemble import RandomForestRegressor
 
@@ -212,7 +217,9 @@ if stock:
                         template='plotly_white')
         st.plotly_chart(fig4)
         
+        st.text('Loading done.')
         #------------------------------------------------------- Gradient Boosting Regressor -----------------------------------------
+        loading()
         from sklearn.ensemble import GradientBoostingRegressor
 
         # Create and train the Gradient Boosting Regressor model
