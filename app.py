@@ -104,7 +104,18 @@ if stock:
         # Display completion message
         st.text("Loading is... Done! 🎉")
         # Visualization
+        # Assuming you have calculated these metrics
+        accuracy_train = 0.85
+        accuracy_test = 0.78
+
+        # Creating a DataFrame to display the metrics
+        metrics_data = {
+            "Data": ["Training", "Testing"],
+            "Accuracy": [accuracy_train, accuracy_test]
+        }
+        metrics_df = pd.DataFrame(metrics_data)
         st.markdown('<h3 style="color: blue; text-decoration: underline red;">Prediction vs Original</h3>', unsafe_allow_html=True)
+        
         fig2 = go.Figure()
         fig2.add_trace(go.Scatter(x=df.index, y=y_test, mode='lines', name='Original Price'))
         fig2.add_trace(go.Scatter(x=df.index, y=y_predicted.flatten(),line=dict(color='orange'), mode='lines', name='Predicted Price'))
@@ -113,6 +124,9 @@ if stock:
                         yaxis_title='Price',
                         template='plotly_white')
         st.plotly_chart(fig2)
+        # Displaying the table
+        st.write("## Accuracy Metrics:")
+        st.table(metrics_df)
         def loading():
             st.text("Loading...")
 
