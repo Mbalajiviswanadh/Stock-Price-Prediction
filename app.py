@@ -30,7 +30,7 @@ if stock:
 
     # Describing Data
     st.subheader(f'{stock} Data from 2013 to 2023 (10 years)')
-    st.write(df.describe())
+    st.write(df)
 
     # Visualization
     st.subheader('Closing Price vs Time chart ')
