@@ -1,8 +1,9 @@
 # Import necessary libraries
 import streamlit as st
+import keras.models as load_model
+from keras.models import  load_model
 import pandas as pd
 import numpy as np
-from keras.models import  load_model
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import os
@@ -13,7 +14,7 @@ st.header('TCS Stock Price Predictor 📊')
 
 # Select stock
 stock_options = ['', 'TCS.NS']
-stock = st.selectbox('Select Stock 🔽', stock_options)
+stock = st.selectbox('Select Stock..🔽', stock_options)
 
 start = '2013-01-01'
 end = '2023-12-31'
