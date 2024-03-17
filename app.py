@@ -73,7 +73,7 @@ if stock:
     if os.path.exists(model_path):
         # Load the pre-trained model
         model = load_model(model_path)
-        st.write('Pre-trained model loaded successfully!')
+        st.write('Pre-trained model loaded successfully! ✅')
     else:
         st.write("Model not found. Please train the model first.")
 
@@ -387,5 +387,4 @@ if stock:
 
 else:
     st.subheader("⛔ Please select a stock!!.")
-
 
