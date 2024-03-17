@@ -387,4 +387,3 @@ if stock:
 
 else:
     st.subheader("⛔ Please select a stock!!.")
-
