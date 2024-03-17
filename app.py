@@ -491,7 +491,7 @@ if stock:
         model = load_model(model_path)
         st.write('Pre-trained model loaded successfully!')
     else:
-        st.write("Model not found. Please train the model first.")
+        st.write("Model not found... Please train the model first.")
 
     if 'model' in locals():
         past_100_days = data_training.tail(100)
