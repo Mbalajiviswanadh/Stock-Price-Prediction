@@ -2,7 +2,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
 from keras.models import  load_model
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -20,6 +19,7 @@ start = '2013-01-01'
 end = '2023-12-31'
 
 # Define scaler object
+from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0, 1))
 
 # Check if a stock is selected
