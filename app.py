@@ -2,30 +2,36 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from keras.models import  load_model
+from keras.models import load_model
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import os
+import yfinance as yf
+from sklearn.preprocessing import MinMaxScaler
+from keras.layers import Dense, Dropout, LSTM
+from keras.models import Sequential
+from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import LogisticRegression
+import seaborn as sns
 
 # Set page configuration
 st.set_page_config(page_title="TCS Stock Price Prediction", page_icon="📊")
 st.header('TCS Stock Price Predictor 📊')
 
 # Select stock
-stock_options = ['', 'TCS.NS','AAPL']
+stock_options = ['', 'TCS.NS']
 stock = st.selectbox('Select Stock 🔽', stock_options)
 
 start = '2013-01-01'
 end = '2023-12-31'
 
-# Define scaler object
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler(feature_range=(0, 1))
-
 # Check if a stock is selected
 if stock:
     # Downloading data
-    import yfinance as yf
     df = yf.download(stock, start, end)
 
     # Describing Data
@@ -64,18 +70,47 @@ if stock:
     # Splitting Data into Training and Testing
     data_training = pd.DataFrame(df['Close'][0:int(len(df) * 0.70)])
     data_testing = pd.DataFrame(df['Close'][int(len(df) * 0.70):])
-    from sklearn.preprocessing import MinMaxScaler
-    scaler = MinMaxScaler(feature_range=(0,1))
-    data_training_array= scaler.fit_transform(data_training)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    data_training_array = scaler.fit_transform(data_training)
+    x_train = []
+    y_train = []
 
+    for i in range(100, data_training_array.shape[0]):
+        x_train.append(data_training_array[i - 100:i])
+        y_train.append(data_training_array[i, 0])
+
+    x_train, y_train = np.array(x_train), np.array(y_train)
 
     model_path = 'my_model.keras'
+
     if os.path.exists(model_path):
         # Load the pre-trained model
         model = load_model(model_path)
         st.write('Pre-trained model loaded successfully! ✅')
     else:
-        st.write("Model not found. Please train the model first.")
+        # Train the model
+        st.write("Model not found. Training the model...")
+        model = Sequential()
+        model.add(LSTM(units=50, activation='relu', return_sequences=True,
+                       input_shape=(x_train.shape[1], 1)))
+        model.add(Dropout(0.2))
+
+        model.add(LSTM(units=60, activation='relu', return_sequences=True))
+        model.add(Dropout(0.3))
+
+        model.add(LSTM(units=80, activation='relu', return_sequences=True))
+        model.add(Dropout(0.4))
+
+        model.add(LSTM(units=120, activation='relu'))
+        model.add(Dropout(0.5))
+
+        model.add(Dense(units=1))
+        model.compile(optimizer='adam', loss='mean_squared_error')
+        model.fit(x_train, y_train, epochs=50)
+
+        # Save the trained model
+        model.save(model_path)
+        st.write("Model trained and saved successfully! ✅")
 
     if 'model' in locals():
         past_100_days = data_training.tail(100)
@@ -104,18 +139,7 @@ if stock:
         # Display completion message
         st.text("Loading is... Done! 🎉")
         # Visualization
-        # Assuming you have calculated these metrics
-        accuracy_train = 0.85
-        accuracy_test = 0.78
-
-        # Creating a DataFrame to display the metrics
-        metrics_data = {
-            "Data": ["Training", "Testing"],
-            "Accuracy": [accuracy_train, accuracy_test]
-        }
-        metrics_df = pd.DataFrame(metrics_data)
         st.markdown('<h3 style="color: blue; text-decoration: underline red;">Prediction vs Original</h3>', unsafe_allow_html=True)
-        
         fig2 = go.Figure()
         fig2.add_trace(go.Scatter(x=df.index, y=y_test, mode='lines', name='Original Price'))
         fig2.add_trace(go.Scatter(x=df.index, y=y_predicted.flatten(),line=dict(color='orange'), mode='lines', name='Predicted Price'))
@@ -124,9 +148,6 @@ if stock:
                         yaxis_title='Price',
                         template='plotly_white')
         st.plotly_chart(fig2)
-        # Displaying the table
-        st.write("## Accuracy Metrics:")
-        st.table(metrics_df)
         def loading():
             st.text("Loading...")
 
