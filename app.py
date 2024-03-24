@@ -12,7 +12,7 @@ st.set_page_config(page_title="TCS Stock Price Prediction", page_icon="📊")
 st.header('TCS Stock Price Predictor 📊')
 
 # Select stock
-stock_options = ['', 'TCS.NS']
+stock_options = ['', 'TCS.NS','AAPL']
 stock = st.selectbox('Select Stock 🔽', stock_options)
 
 start = '2013-01-01'
