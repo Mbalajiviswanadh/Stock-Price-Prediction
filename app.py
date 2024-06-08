@@ -2,14 +2,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from keras.models import load_model # type: ignore
+from keras.models import load_model
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import os
 import yfinance as yf
 from sklearn.preprocessing import MinMaxScaler
-from keras.layers import Dense, Dropout, LSTM # type: ignore
-from keras.models import Sequential # type: ignore
+from keras.layers import Dense, Dropout, LSTM
+from keras.models import Sequential
 from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
