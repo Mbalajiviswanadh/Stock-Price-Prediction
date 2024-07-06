@@ -24,7 +24,7 @@ This project is a comprehensive tool for predicting the stock prices of Tata Con
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/tcs-stock-prediction.git
+   git clone https://github.com/Mbalajiviswanadh/Stock-Price-Prediction
    cd tcs-stock-prediction
    ```
 
@@ -89,3 +89,15 @@ This project is a comprehensive tool for predicting the stock prices of Tata Con
 ## Conclusion
 
 This project provides an interactive and comprehensive tool for analyzing and predicting TCS stock prices using various machine learning techniques. It offers both visualization and performance metrics to assess the accuracy and reliability of different models.
+
+## Images
+
+| Image 1                        | Image 2                        | Image 3                        | Image 4                        |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| ![Image 1](/images/pic1.png)   | ![Image 2](/images/pic2.png)   | ![Image 3](/images/pic3.png)   | ![Image 4](/images/pic4.png)   |
+| Image 5                        | Image 6                        | Image 7                        | Image 8                        |
+| ![Image 5](/images/pic5.png)   | ![Image 6](/images/pic6.png)   | ![Image 7](/images/pic7.png)   | ![Image 8](/images/pic8.png)   |
+| Image 9                        | Image 10                       | Image 11                       | Image 12                       |
+| ![Image 9](/images/pic9.png)   | ![Image 10](/images/pic10.png) | ![Image 11](/images/pic11.png) | ![Image 12](/images/pic12.png) |
+| Image 13                       |                                |                                |                                |
+| ![Image 13](/images/pic13.png) |                                |                                |                                |
